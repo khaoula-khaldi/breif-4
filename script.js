@@ -14,11 +14,11 @@ const carte = [
     ];
  carte [];
  
-for (let i = 0; i < carte; i++) {
+for (let i = 0; i < 12; i++) {
   if (carte[i].rarity === "Common" || carte[i].rarity === "Rare" || carte[i].rarity === "Epique" ||(carte[i].rarity === "Légendaire")) {
     cartesFiltrees.push(carte[i]);
   }else{
-    
+    cartesFiltrees.push()
   }
  
 }
