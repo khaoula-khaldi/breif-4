@@ -1,6 +1,6 @@
-// ----------------------------------------------------------
+
 // Données des cartes ChronoDeck
-// -----------------------------------------------------------
+
 const carte = [
   {
     id: 1,
@@ -100,9 +100,9 @@ const carte = [
   },
 ];
 
-// ==========================
+
 // Fonction d'affichage
-// ==========================
+
 function afficherCartes(cartesAAfficher = carte) {
   const container = document.getElementById("cards-container");
   container.innerHTML = "";
@@ -128,9 +128,9 @@ function afficherCartes(cartesAAfficher = carte) {
   });
 }
 
-// ==========================
+
 // Filtrage
-// ==========================
+
 const filterButtons = document.querySelectorAll(".filter-btn");
 
 filterButtons.forEach(btn => {
@@ -144,57 +144,6 @@ filterButtons.forEach(btn => {
     }
   });
 });
-
-// ==========================
-// Chargement initial
-// ==========================
-afficherCartes();
-
-
-    // Collection de l'utilisateur
-    let collection = JSON.parse(localStorage.getItem("panier")) || []; // On prend le panier comme base d'achat
-    let deckContainer = document.getElementById("deck-container");
-
-    function afficherDeck(cartesAAfficher = collection) {
-      deckContainer.innerHTML = "";
-      if (cartesAAfficher.length === 0) {
-        deckContainer.innerHTML = `<p class="text-white text-lg">Vous n’avez encore aucune carte dans votre deck.</p>`;
-        return;
-      }
-
-      cartesAAfficher.forEach(c => {
-        const div = document.createElement("div");
-        div.className = "bg-[#17171680] rounded-2xl shadow-xl overflow-hidden hover:scale-105 transition transform p-4 text-center";
-        div.innerHTML = `
-          <img src="${c.image}" alt="${c.name}" class="w-full h-64 object-cover mb-2">
-          <h3 class="text-xl font-bold text-white mb-2">${c.name}</h3>
-          <p class="text-sm text-gray-300 mb-2">${c.Description}</p>
-          <p class="text-yellow-400 font-semibold mb-3">${c.prix}</p>
-          <p class="text-sm text-gray-400 mb-3">${c.rare}</p>
-          <button class="revendre-btn bg-red-600 text-white px-2 py-1 rounded">Revendre</button>
-        `;
-        deckContainer.appendChild(div);
-
-        div.querySelector(".revendre-btn").addEventListener("click", () => {
-          collection = collection.filter(item => item.id !== c.id);
-          localStorage.setItem("panier", JSON.stringify(collection));
-          alert(`${c.name} a été retirée de votre deck et peut être remise sur le marché !`);
-          afficherDeck();
-        });
-      });
-    }
-
-    // Filtrage par rareté
-    document.querySelectorAll(".filter-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const rarity = btn.dataset.rarity;
-        if (rarity === "") afficherDeck();
-        else afficherDeck(collection.filter(c => c.rare === rarity));
-      });
-    });
-
-    afficherDeck();
-  
 
 
     
