@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Marché ChronoDeck</title>
+</head>
+
+<body class="bg-cover bg-center min-h-screen" style="background-image: url('img/jeu.png');">
+
+  <!-- HEADER -->
+  <header class="bg-[#fffdf622] flex flex-col md:flex-row justify-between items-center p-4 md:p-6 text-white mb-10 rounded-3xl space-y-3 md:space-y-0 mt-10">
+    <div class="text-white font-bold text-xl">LOGO / Marché</div>
+    <nav>
+      <ul class="flex flex-wrap justify-center gap-3 md:gap-6 text-sm md:text-base w-full">
+        <li><a href="index.html" class="hover:underline">Accueil</a></li>
+        <li><a href="Guide.html" class="hover:underline">Guide</a></li>
+        <li><a href="marche.html" class="hover:underline">Marché</a></li>
+        <li><a href="mon_dek.html" class="hover:underline">Mon deck</a></li>
+        <li><a href="favoris.html" class="hover:underline">Favoris</a></li>
+        <li>
+          <button  href= "panier.html" class="bg-red-600 text-white px-3 py-1 rounded text-sm md:text-base">Cart</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- FILTRES -->
+  <section class="flex flex-wrap gap-3 justify-center mb-10 px-4">
+    <button class="filter-btn bg-blue-600 text-white px-6 py-3 rounded-full font-bold hover:bg-blue-700 transition-all" data-rarity="">ALL</button>
+    <button class="filter-btn bg-gray-500 text-white px-6 py-3 rounded-full font-bold hover:bg-gray-600 transition-all" data-rarity="Common">COMMON</button>
+    <button class="filter-btn bg-green-500 text-white px-6 py-3 rounded-full font-bold hover:bg-green-600 transition-all" data-rarity="Rare">RARE</button>
+    <button class="filter-btn bg-purple-600 text-white px-6 py-3 rounded-full font-bold hover:bg-purple-700 transition-all" data-rarity="Epique">EPIQUE</button>
+    <button class="filter-btn bg-red-600 text-white px-6 py-3 rounded-full font-bold hover:bg-red-700 transition-all" data-rarity="Légendaire">LEGENDAIRE</button>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <!-- CARDS -->
+  <section class="flex flex-wrap justify-center gap-6 px-4" id="marketCards"></section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- FOOTER -->
+  <footer class="text-white bg-[#17171670] px-8 py-12 mt-16 rounded-3xl flex flex-col md:flex-row justify-between gap-10">
+    <div>
+      <h2 class="font-bold text-lg mb-2">ChronoDeck</h2>
+      <p class="text-sm">Plongez dans l’univers des cartes digitales à collectionner.<br>Créez votre deck, échangez et vivez une expérience unique.</p>
+    </div>
+    <div>
+      <h2 class="font-bold text-lg mb-2">Explorer</h2>
+      <p class="text-sm">Accueil<br>Guide du jeu<br>Marché<br>Mon Deck<br>Favoris<br>Panier</p>
+    </div>
+    <div>
+      <h2 class="font-bold text-lg mb-2">Bas de page</h2>
+      <p class="text-sm">© 2025 ChronoDeck.<br>Tous droits réservés.<br>Design réalisé par Khaoula Khaldi.</p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  </body>
+  </html>
