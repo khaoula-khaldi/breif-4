@@ -101,49 +101,47 @@ const carte = [
 ];
 
 
-// Fonction d'affichage
-
-function afficherCartes(cartesAAfficher = carte) {
+function afficherCartes(rarite = "toutes") {
   const container = document.getElementById("cards-container");
   container.innerHTML = "";
 
-  cartesAAfficher.forEach(c => {
-    const div = document.createElement("div");
-    div.className = "bg-[#17171680] rounded-2xl shadow-xl overflow-hidden hover:scale-105 transition transform";
+  for (let i = 0; i < carte.length; i++) {
+    const c = carte[i];
 
-    div.innerHTML = `
-      <img src="${c.image}" alt="${c.name}" class="w-full h-64 object-cover">
-      <div class="p-4 text-center">
-        <h3 class="text-xl font-bold text mb-2">${c.name}</h3>
+   
+    if (rarite === "toutes" || c.rare === rarite) {
+      const div = document.createElement("div");
+      div.className = "bg-[#171716cc] rounded-2xl shadow-xl overflow-hidden hover:scale-105 transition transform p-4 text-center";
+      div.style.width = "30%";
+
+      div.innerHTML = `
+        <img src="${c.image}" alt="${c.name}" class="w-full h-64 object-cover mb-2 rounded-xl">
+        <h3 class="text-xl font-bold text-white mb-2">${c.name}</h3>
         <p class="text-sm text-gray-300 mb-2">${c.Description}</p>
         <p class="text-yellow-400 font-semibold mb-3">${c.prix}</p>
         <p class="text-sm text-gray-400 mb-3">${c.rare}</p>
-        <div class="flex gap-2">
-          <button class=" text-white bg-green-500  px-2 py-1 rounded-lg font-bold  text-xs ">Acheter</button>
-          <button class="bg-green-500 text-white px-2 py-1 rounded-lg font-bold  text-xs ">Favoris</button>
+        <div class="flex justify-center gap-2">
+          <button class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs font-bold">Acheter</button>
+          <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs font-bold">Favoris</button>
         </div>
-      </div>
-    `;
-    container.appendChild(div);
-  });
-}
+      `;
 
-
-// Filtrage
-
-const filterButtons = document.querySelectorAll(".filter-btn");
-
-filterButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const rarity = btn.dataset.rarity;
-    if (rarity === "") {
-      afficherCartes(carte);
-    } else {
-      const filtred = carte.filter(c => c.rare === rarity);
-      afficherCartes(filtred);
+      container.appendChild(div);
     }
-  });
+  }
+}
+  // filtrage
+document.addEventListener("DOMContentLoaded", function() {
+  afficherCartes(); 
+  const boutons = document.querySelectorAll(".filter-btn");
+  for (let i = 0; i < boutons.length; i++) {
+    boutons[i].addEventListener("click", function() {
+      const rariteChoisie = this.dataset.rarity;
+      if (rariteChoisie === "") {
+        afficherCartes("toutes");
+      } else {
+        afficherCartes(rariteChoisie);
+      }
+    });
+  }
 });
-
-
-    
