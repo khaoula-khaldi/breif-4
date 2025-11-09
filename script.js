@@ -1,147 +1,174 @@
+let marcheContainer = document.getElementById('marcheContainer');
+let marcheArr = JSON.parse(localStorage.getItem('marcheArr')) || [];
+let cartesAchetees = JSON.parse(localStorage.getItem("cartesAchetees")) || [];
 
-// Données des cartes ChronoDeck
+console.log(marcheArr);
 
-const carte = [
-  {
-    id: 1,
-    image: "img/gym1.png",
-    prix: "60$",
-    name: "Champion cryogénisé",
-    Description: "Râle d’agonie : vous obtenez un serviteur légendaire aléatoire. Réduit son coût de (1).",
-    rare: "Common",
-  },
-  {
-    id: 2,
-    image: "img/gym6.png",
-    prix: "36$",
-    name: "Arrêt du temps",
-    Description: "Une horloge cassée donne l’heure exacte deux fois par jour.",
-    rare: "Common",
-  },
-  {
-    id: 3,
-    image: "img/gym7.png",
-    prix: "75$",
-    name: "Manifeste commémoratif",
-    Description: "Laissez-moi mourir, bon sang !",
-    rare: "Common",
-  },
-  {
-    id: 4,
-    image: "img/gym8.png",
-    prix: "80$",
-    name: "Broxigar",
-    Description: "Icône, Charge. Début de partie : disparaît. Tuez les 4 Démons d’Argus pour le faire réapparaître.",
-    rare: "Rare",
-  },
-  {
-    id: 5,
-    image: "img/gym9.png",
-    prix: "68$",
-    name: "Solitude",
-    Description: "Du temps pour moi.",
-    rare: "Rare",
-  },
-  {
-    id: 6,
-    image: "img/gym10.png",
-    prix: "52$",
-    name: "Glaive perdu dans le temps",
-    Description: "Je savais bien que je l’avais laissé quelque part !",
-    rare: "Rare",
-  },
-  {
-    id: 7,
-    image: "img/gym11.png",
-    prix: "101$",
-    name: "Dodo menacé d’extinction",
-    Description: "Les rumeurs concernant mon extinction imminente sont grandement exagérées…",
-    rare: "Epique",
-  },
-  {
-    id: 8,
-    image: "img/gym12.png",
-    prix: "80$",
-    name: "Druidesse du renouveau",
-    Description: "Rembobinage Cri de guerre : lance 2 sorts de nature aléatoires.",
-    rare: "Epique",
-  },
-  {
-    id: 9,
-    image: "img/gym12.png",
-    prix: "80$",
-    name: "Mentor bien-né",
-    Description: "Cri de guerre : vous obtenez un élève 2/2 et découvrez un sort à lui enseigner.",
-    rare: "Epique",
-  },
-  {
-    id: 10,
-    image: "img/gym13.png",
-    prix: "86$",
-    name: "Générale des forestiers Sylvanas",
-    Description: "Cri de guerre : inflige 2 points de dégâts à chaque adversaire.",
-    rare: "Légendaire",
-  },
-  {
-    id: 11,
-    image: "img/gym14.png",
-    prix: "72$",
-    name: "Traqueur d’époque",
-    Description: "Quelle époque, mes aïeux, quelle époque !",
-    rare: "Légendaire",
-  },
-  {
-    id: 12,
-    image: "img/gym15.png",
-    prix: "365$",
-    name: "Bombe tapante",
-    Description: "Croyez-moi, le minuteur s’arrête toujours à 0 seconde.",
-    rare: "Légendaire",
-  },
-];
+// --- FONCTION D'AFFICHAGE ---
+function affichageHtml(carte) {
+  let div = document.createElement('div');
+  div.id = `carte-${carte.id}`;
+  div.className = "w-[400px] min-h-[560px]";
 
+  div.innerHTML = `
+    <img src="${carte.image}" alt="${carte.name}" class="w-full h-64 object-cover mb-2 rounded-xl">
+    <h3 class="text-xl font-bold text-white mb-2">${carte.name}</h3>
+    <p class="text-sm text-gray-300 mb-2">${carte.Description}</p>
+    <p class="text-yellow-400 font-semibold mb-3">${carte.prix}</p>
+    <p class="text-sm text-gray-400 mb-3">${carte.rare}</p>
+    <div class="flex justify-center gap-2">
+      <button class="btnAcheter bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs font-bold">
+        Acheter
+      </button>
+      <button class="btnFavoris bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs font-bold">
+        Favoris
+      </button>
+    </div>
+  `;
 
-function afficherCartes(rarite = "toutes") {
-  const container = document.getElementById("cards-container");
-  container.innerHTML = "";
-
-  for (let i = 0; i < carte.length; i++) {
-    const c = carte[i];
-
+  // Ajouter l'événement "Acheter"
+  const btnAcheter = div.querySelector(".btnAcheter");
+  btnAcheter.addEventListener("click", () => {
    
-    if (rarite === "toutes" || c.rare === rarite) {
-      const div = document.createElement("div");
-      div.className = "bg-[#171716cc] rounded-2xl shadow-xl overflow-hidden hover:scale-105 transition transform p-4 text-center";
-      div.style.width = "30%";
+      cartesAchetees.push(carte);
+      localStorage.setItem("cartesAchetees", JSON.stringify(cartesAchetees));
 
-      div.innerHTML = `
-        <img src="${c.image}" alt="${c.name}" class="w-full h-64 object-cover mb-2 rounded-xl">
-        <h3 class="text-xl font-bold text-white mb-2">${c.name}</h3>
-        <p class="text-sm text-gray-300 mb-2">${c.Description}</p>
-        <p class="text-yellow-400 font-semibold mb-3">${c.prix}</p>
-        <p class="text-sm text-gray-400 mb-3">${c.rare}</p>
-        <div class="flex justify-center gap-2">
-          <button class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs font-bold">Acheter</button>
-          <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs font-bold">Favoris</button>
-        </div>
-      `;
+  });
 
-      container.appendChild(div);
+  return div;
+}
+
+
+async function FetchCarte() {
+  try {
+    const res = await fetch("./cards.json");
+    const data = await res.json();
+    data.forEach((carte) => {
+      if (carte.rare == "common" || carte.rare == "Rare" || carte.rare == "Epique" || carte.rare == "Légendaire") {
+        const cardHtml = affichageHtml(carte)
+        marcheContainer.append(cardHtml);
+      }
+    })
+
+
+    const tout = document.getElementById("tout");
+    const common = document.getElementById("common");
+    const Rare = document.getElementById("Rare");
+    const Epique = document.getElementById("Epique");
+    const Légendaire = document.getElementById("Légendaire");
+
+
+
+
+    // Fonction qui affiche toutes les cartes
+
+    function afficherToutesLesCartes(data) {
+      marcheContainer.innerHTML = "";
+      data.forEach((carte) => {
+        const cardHtml = affichageHtml(carte);
+        marcheContainer.append(cardHtml);
+
+      });
     }
+
+
+    // click tout 
+
+    tout.addEventListener("click", () => {
+      afficherToutesLesCartes(data);
+    });
+
+
+    //Epique
+    data.forEach((carte) => {
+      if (carte.rare == "Epique") {
+        const cardHtml = affichageHtml(carte)
+        marcheContainer.append(cardHtml);
+      }
+      Epique.addEventListener("click", () => {
+        marcheContainer.innerHTML = "";
+        data.forEach((carte) => {
+          if (carte.rare == "Epique") {
+            const cardHtml = affichageHtml(carte)
+            marcheContainer.append(cardHtml);
+          }
+
+        }
+        )
+
+      })
+    })
+
+
+    //Rare
+    data.forEach((carte) => {
+      if (carte.rare == "Rare") {
+        const cardHtml = affichageHtml(carte)
+        marcheContainer.append(cardHtml);
+      }
+      Rare.addEventListener("click", () => {
+        marcheContainer.innerHTML = "";
+        data.forEach((carte) => {
+          if (carte.rare == "Rare") {
+            const cardHtml = affichageHtml(carte)
+            marcheContainer.append(cardHtml);
+          }
+
+        }
+        )
+
+
+
+      })
+    })
+
+
+    //légendaire
+    data.forEach((carte) => {
+      if (carte.rare == "légendaire") {
+        const cardHtml = affichageHtml(carte)
+        marcheContainer.append(cardHtml);
+      }
+      Légendaire.addEventListener("click", () => {
+        marcheContainer.innerHTML = "";
+        data.forEach((carte) => {
+          if (carte.rare == "Légendaire") {
+            const cardHtml = affichageHtml(carte)
+            marcheContainer.append(cardHtml);
+          }
+
+        }
+        )
+
+      })
+    })
+
+    //common
+    data.forEach((carte) => {
+      if (carte.rare == "common") {
+        const cardHtml = affichageHtml(carte)
+        marcheContainer.append(cardHtml);
+      }
+      Common.addEventListener("click", () => {
+        marcheContainer.innerHTML = "";
+        data.forEach((carte) => {
+          if (carte.rare == "Common") {
+            const cardHtml = affichageHtml(carte)
+            marcheContainer.append(cardHtml);
+          }
+
+        }
+        )
+
+      })
+
+    })
+  }
+
+
+  catch (error) {
+    console.error(error);
   }
 }
-  // filtrage
-document.addEventListener("DOMContentLoaded", function() {
-  afficherCartes(); 
-  const boutons = document.querySelectorAll(".filter-btn");
-  for (let i = 0; i < boutons.length; i++) {
-    boutons[i].addEventListener("click", function() {
-      const rariteChoisie = this.dataset.rarity;
-      if (rariteChoisie === "") {
-        afficherCartes("toutes");
-      } else {
-        afficherCartes(rariteChoisie);
-      }
-    });
-  }
-});
+FetchCarte()
+

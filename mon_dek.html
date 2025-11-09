@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ChronoDeck - Marché</title>
+  <title>ChronoDeck - mon-dek</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -36,17 +36,22 @@
 
 
   <div class="flex justify-center gap-4 mb-10">
-    <button class="filter-btn bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded font-semibold" data-rarity="">Toutes</button>
-    <button class="filter-btn bg-gray-500 hover:bg-gray-600 px-4 py-2 rounded font-semibold" data-rarity="Common">Common</button>
-    <button class="filter-btn bg-green-500 hover:bg-green-600 px-4 py-2 rounded font-semibold" data-rarity="Rare">Rare</button>
-    <button class="filter-btn bg-purple-500 hover:bg-purple-600 px-4 py-2 rounded font-semibold" data-rarity="Epique">Épique</button>
-    <button class="filter-btn bg-red-500 hover:bg-red-600 px-4 py-2 rounded font-semibold" data-rarity="Légendaire">Légendaire</button>
+    <button class="filter-btn bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded font-semibold" id="tout">tout</button>
+    <button class="filter-btn bg-gray-500 hover:bg-gray-600 px-4 py-2 rounded font-semibold" id="Common">Common</button>
+    <button class="filter-btn bg-green-500 hover:bg-green-600 px-4 py-2 rounded font-semibold" id="Rare">Rare</button>
+    <button class="filter-btn bg-purple-500 hover:bg-purple-600 px-4 py-2 rounded font-semibold" id="Epique">Épique</button>
+    <button class="filter-btn bg-red-500 hover:bg-red-600 px-4 py-2 rounded font-semibold" id="Légendaire">Légendaire</button>
   </div>
+
+
+  <!-- Conteneur pour les cartes achetées -->
+<div id="dekContainer" class="flex flex-wrap justify-center gap-6 mb-10"></div>
+
 
 
 
   <!-- ================== FOOTER ================== -->
-  <footer class="bg-[#17171670] px-8 py-12 mt-16 rounded-3xl flex flex-col md:flex-row justify-between gap-10">
+  <footer class="bg-[#17171670] px-8 py-12  rounded-3xl flex flex-col md:flex-row justify-between gap-10">
     <div>
       <h2 class="font-bold text-lg mb-2">ChronoDeck</h2>
       <p class="text-sm">
@@ -74,8 +79,8 @@
       </p>
     </div>
   </footer>
-
-  <!-- ================== SCRIPT ================== -->
+<!-- ================== SCRIPT ================== -->
   <script src="script.js"></script>
 </body>
+  
 </html>
